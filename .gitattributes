@@ -1,0 +1,5 @@
+# Keep line endings unambiguous so the same warning never shows up again:
+# repository content is normalised to LF, except the mod source, which stays CRLF
+# (that is how it is developed and tested on Windows).
+* text=auto eol=lf
+*.wh.cpp text eol=crlf

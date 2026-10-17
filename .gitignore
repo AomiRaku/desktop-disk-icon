@@ -1,3 +1,6 @@
+# Reference implementations downloaded for study (GPL-3.0, not part of this project).
+ref/
+
 # Local test harness (DLLs, exes, probe sources and logs) - not part of the release.
 spike/
 
@@ -19,3 +22,8 @@ preview/
 *.user
 Thumbs.db
 desktop.ini
+
+# Local backup snapshots
+*bag
+*backup
+*bak
