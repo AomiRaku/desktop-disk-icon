@@ -76,6 +76,9 @@ The mod starts a background thread inside `explorer.exe`:
   these entries are removed together with the item, so no trace is left behind.
 - No files are created on the desktop, so nothing is synced away by OneDrive or other desktop
   backups.
+- The mod only acts in the Explorer process that owns the desktop window; other
+  `explorer.exe` instances (folder windows in a separate process, `explorer.exe /select,` and
+  similar short-lived processes) are skipped, so they never touch the shared registry keys.
 
 ## Verified behaviour
 
