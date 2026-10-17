@@ -7,7 +7,6 @@
 // @version         1.0.0
 // @author          Raku Inkyetta
 // @github          https://github.com/AomiRaku
-// @homepage        https://raku404.com/
 // @license         GPL-3.0
 // @include         explorer.exe
 // @compilerOptions -lole32 -lshell32 -luuid -ladvapi32
