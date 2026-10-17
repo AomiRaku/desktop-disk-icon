@@ -1,0 +1,21 @@
+# Local test harness (DLLs, exes, probe sources and logs) - not part of the release.
+spike/
+
+# Local screenshots. The README embeds images from an external host instead.
+preview/
+
+# Build artifacts
+*.dll
+*.exe
+*.o
+*.obj
+*.pdb
+*.ilk
+*.exe.log
+
+# Editor and OS files
+.vs/
+.vscode/
+*.user
+Thumbs.db
+desktop.ini
