@@ -77,8 +77,8 @@ The mod starts a background thread inside `explorer.exe`:
   to the real `NameSpace` enumeration, so built-in items such as This PC and Recycle Bin keep
   working.
 - Because the hooks only run in Explorer, the items never show up in other applications'
-  Open/Save dialogs, and they disappear as soon as the mod is unloaded. Content that older builds
-  left in the real registry is cleaned up once on startup.
+  Open/Save dialogs, and they disappear as soon as the mod is unloaded. The bookkeeping values the
+  shell writes under `Shell Extensions\Cached` are removed on unload as well.
 - No files are created on the desktop, so nothing is synced away by OneDrive or other desktop
   backups.
 - The mod only acts in the Explorer process that owns the desktop window; other
