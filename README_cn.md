@@ -61,10 +61,12 @@
 
 ### 副作用与清理
 
-- **注册表项是易失性键**（`REG_OPTION_VOLATILE`）：只存在于内存中，永不写入磁盘；即使异常终止，
-  重启后也会自然消失。禁用或卸载模组时立即删除，被强制终止时残留的内存键会在下次启动时清除。
-- 资源管理器会把见过的 CLSID 记录在 `Shell Extensions\Cached` 下；这些记录会随项一起删除，
-  不留痕迹。
+- **不写系统注册表。** 项的定义放在模组存储目录下的私有 hive 中（`RegLoadAppKey`），并用 4 个
+  注册表读取 hook（`RegOpenKeyExW` / `RegEnumKeyExW` / `RegQueryInfoKeyW` / `RegGetValueW` / `RegCloseKey`）
+  把资源管理器对 `Desktop\NameSpace` 与 `Software\Classes\CLSID` 的读取重定向到该 hive。
+  我们的条目是**追加**到真实的 `NameSpace` 枚举里，因此「此电脑」「回收站」等系统项照常显示。
+- 由于 hook 只在资源管理器进程内生效，这些项不会出现在其他程序的文件对话框里，模组卸载后
+  立即消失。旧版本写入真实注册表的内容会在启动时做一次性清理。
 - 不会在桌面创建任何文件，因此不会被 OneDrive 等桌面备份同步到其他电脑。
 - 模组只在拥有桌面窗口的资源管理器进程中工作；其他 `explorer.exe` 实例（“在单独进程中打开
   文件夹窗口”、`explorer.exe /select,` 等短命进程）会被跳过，不会改动共享的注册表项。

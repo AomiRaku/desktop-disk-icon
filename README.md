@@ -69,11 +69,16 @@ The mod starts a background thread inside `explorer.exe`:
 
 ### Side effects and cleanup
 
-- **The registry keys are volatile** (`REG_OPTION_VOLATILE`): they live in memory only, are never
-  written to disk and disappear on restart even after a crash. Disabling or uninstalling the mod
-  deletes them immediately; leftovers from a forced termination are removed on the next start.
-- The shell records a bookkeeping entry under `Shell Extensions\Cached` for every CLSID it has seen;
-  these entries are removed together with the item, so no trace is left behind.
+- **Nothing is written to the system registry.** The item definitions live in a private hive
+  (`RegLoadAppKey`) inside the mod's storage, and five registry read hooks
+  (`RegOpenKeyExW` / `RegEnumKeyExW` / `RegQueryInfoKeyW` / `RegGetValueW` / `RegCloseKey`) redirect
+  Explorer's reads
+  of `Desktop\NameSpace` and `Software\Classes\CLSID` to that hive. The mod's entries are appended
+  to the real `NameSpace` enumeration, so built-in items such as This PC and Recycle Bin keep
+  working.
+- Because the hooks only run in Explorer, the items never show up in other applications'
+  Open/Save dialogs, and they disappear as soon as the mod is unloaded. Content that older builds
+  left in the real registry is cleaned up once on startup.
 - No files are created on the desktop, so nothing is synced away by OneDrive or other desktop
   backups.
 - The mod only acts in the Explorer process that owns the desktop window; other
