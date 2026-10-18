@@ -70,8 +70,8 @@ The mod starts a background thread inside `explorer.exe`:
 ### Side effects and cleanup
 
 - **Nothing is written to the system registry.** The item definitions live in a private hive
-  (`RegLoadAppKey`) inside the mod's storage, and five registry read hooks
-  (`RegOpenKeyExW` / `RegEnumKeyExW` / `RegQueryInfoKeyW` / `RegGetValueW` / `RegCloseKey`) redirect
+  (`RegLoadAppKey`) inside the mod's storage, and four registry read hooks
+  (`RegOpenKeyExW` / `RegEnumKeyExW` / `RegQueryInfoKeyW` / `RegGetValueW`) redirect
   Explorer's reads
   of `Desktop\NameSpace` and `Software\Classes\CLSID` to that hive. The mod's entries are appended
   to the real `NameSpace` enumeration, so built-in items such as This PC and Recycle Bin keep

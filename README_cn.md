@@ -62,7 +62,7 @@
 ### 副作用与清理
 
 - **不写系统注册表。** 项的定义放在模组存储目录下的私有 hive 中（`RegLoadAppKey`），并用 4 个
-  注册表读取 hook（`RegOpenKeyExW` / `RegEnumKeyExW` / `RegQueryInfoKeyW` / `RegGetValueW` / `RegCloseKey`）
+  注册表读取 hook（`RegOpenKeyExW` / `RegEnumKeyExW` / `RegQueryInfoKeyW` / `RegGetValueW`）
   把资源管理器对 `Desktop\NameSpace` 与 `Software\Classes\CLSID` 的读取重定向到该 hive。
   我们的条目是**追加**到真实的 `NameSpace` 枚举里，因此「此电脑」「回收站」等系统项照常显示。
 - 由于 hook 只在资源管理器进程内生效，这些项不会出现在其他程序的文件对话框里，模组卸载后
